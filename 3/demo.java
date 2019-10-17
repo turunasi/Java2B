@@ -17,8 +17,6 @@ class demo {
       X[i] = scanner.nextInt();
     }
 
-    System.out.println("Reverse !");
-    
     reverse(X);
 
     for (int i = 0; i < l; i++) {
@@ -34,6 +32,7 @@ class demo {
   }
   
   static void reverse (int[] X) {
+    System.out.println("Reverse !");
     for (int i=0;i <= Math.floor(l/2); i++) {
       swap(X,l-1-i,i);
     }
