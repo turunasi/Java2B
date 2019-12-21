@@ -22,6 +22,8 @@ public class kadai extends JFrame{
         int my_x;
         int player_width,player_height;
         int enemy_width,enemy_height;
+        int bom_flag;
+        int bom_num;
         int my_life;
         int n;
         public static final int missile_number = 5;
@@ -49,6 +51,7 @@ public class kadai extends JFrame{
             n = 14;
             num_of_alive = 14;
             my_life = 3;
+            bom_num = 2;
             enemy_x = new int[n];
             enemy_y = new int[n];
             enemy_move = new int[n];
@@ -97,7 +100,11 @@ public class kadai extends JFrame{
             g.drawImage(image,my_x,400,this);
             for(i=0;i<my_life;i++){
                 g.setColor(Color.red);
-                g.fillRect(20,20*i,10,10);
+                g.fillRect(10+20*i,10,10,10);
+            }
+            for(i=0;i<bom_num;i++){
+                g.setColor(Color.blue);
+                g.fillRect(10+20*i,30,10,10);
             }
             for(i=0;i<n;i++){
                 if(enemy_alive[i] == 1){
@@ -201,6 +208,15 @@ public class kadai extends JFrame{
                     my_x = my_x - move_x/2;
                 } else {
                     my_x = my_x - move_x;
+                }
+                break;
+                case KeyEvent.VK_Z:
+                for (int i=0;i<missile_number;i++) {
+                    if(missile_flags[i] == 0){
+                        my_missile_x[i] = my_x + player_width / 2;
+                        my_missile_y[i] = MY_Y;//MY_Y=400
+                        missile_flags[i] = 1;
+                    }
                 }
                 break;
                 case KeyEvent.VK_X:
