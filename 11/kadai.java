@@ -23,7 +23,7 @@ public class kadai extends JFrame{
         int player_width,player_height;
         int enemy_width,enemy_height;
         int n;
-        public static final int missile_number = 3;
+        public static final int missile_number = 5;
         int enemy_x[];
         int enemy_y[];
         int enemy_move[];
@@ -133,7 +133,7 @@ public class kadai extends JFrame{
                 if( ((enemy_missile_x[i]+2) >= my_x) &&
                 ((my_x+player_width) > enemy_missile_x[i]) &&
                 ( (enemy_missile_y[i]+5) >= MY_Y ) &&
-                ((MY_Y + player_height) > enemy_missile_y[i]) ){
+                ((MY_Y + player_height) > enemy_missile_y[i]) && enemy_missile_flag[i] == 1){
                     System.out.println("===Game End===");
                     System.exit(0);
                 }
@@ -153,7 +153,7 @@ public class kadai extends JFrame{
                         if( (enemy_x[i] <= my_missile_x[j]) &&
                         ( my_missile_x[j] < (enemy_x[i]+enemy_width)) &&
                         ((enemy_y[i]+enemy_height) >= my_missile_y[j]) &&
-                        enemy_y[i] < (my_missile_y[j]+5) ){
+                        enemy_y[i] < (my_missile_y[j]+5) && (missile_flags[j] == 1)){
                             enemy_alive[i]=0;
                             missile_flags[j] = 0;
                             num_of_alive--;
