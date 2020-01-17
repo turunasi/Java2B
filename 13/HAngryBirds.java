@@ -57,19 +57,26 @@ public class HAngryBirds extends JFrame{
 			}
 		}
 		
-		public void actionPerformed(ActionEvent e){
+		public void actionPerformed(ActionEvent e) {
 			Dimension d;
 			d=getSize();
-			t+=0.2;
+			t+=0.01;
 //-------------------------------------------------------------------
 			my_x = (int)(v*v_x*t+start_x);
-			my_y = (int)(9.8*t*t/2 - v*v_y*t+start_y);
-//-------------------------------------------------------------------
-			if((my_x<0)||(my_x>d.width)||(my_y>d.height)||(my_y<0)){
+			my_y = (int)(v*v_y*t+start_y);
+//------------------------------------------------------------------
+			if(my_x<0){
 				timer.stop();
 				my_x=init_x;
 				my_y=init_y;
 				t=0.0;				
+			} else if(my_x+my_width>d.width){ 
+				v_x = -v_x;
+				System.out.print("hit x!");
+			} else if ((my_y+my_height>d.height)||(my_y-my_height<=0)) {
+				v_y = -v_y;
+				System.out.print("hit y!");
+				System.out.print((my_y-2*my_height<0));
 			}
 			grab_flag=0;
 			repaint();
@@ -94,11 +101,11 @@ public class HAngryBirds extends JFrame{
 		public void mouseReleased(MouseEvent me)
 		{
 			if(grab_flag==1){
-				timer = new Timer(100, this);
+				timer = new Timer(1, this);
 				timer.start();
 //-------------------------------------------------------------------
 				v_x = (double)(start_x-mouse_x)/100;
-				v_y = -(double)(start_y-mouse_y)/100;
+				v_y = (double)(start_y-mouse_y)/100;
 //-------------------------------------------------------------------
 				start_x = my_x;
 				start_y = my_y;
